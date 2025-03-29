@@ -1,0 +1,11 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    width: 1200px;
+    margin: 0 auto;
+}
