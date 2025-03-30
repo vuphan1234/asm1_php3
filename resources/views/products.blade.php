@@ -79,7 +79,7 @@
         <div class="grid">
             @foreach ($bookByCates as $bookByCate)
             <div class="product">
-                <a href="/productdetail/{{ $bookByCate->slug }}">
+                <a href="/productdetail/{{ $bookByCate->slug }}" style="text-decoration: none">
                     <img src="{{ asset('img/product/'.$bookByCate->image_url) }}" alt="Mèo Chiến Binh">
                     <h3>{{ $bookByCate->title }}</h3>
                     <p>Giá: {{number_format($bookByCate->price, 0, ',', '.')}}đ</p>

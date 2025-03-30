@@ -22,7 +22,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/products/{slug}', [ProductController::class, 'index']);
 Route::get('/productdetail/{slug}', [ProductController::class, 'productDetail']);

@@ -7,21 +7,31 @@
 
 <div class="auth-container">
     <h2>Đăng nhập</h2>
-    @if ($message = Session::get('error'))
-    <div>
-        <strong>{{ $message }}</strong>
-    </div>
+{{--    @if ($message = Session::get('error'))--}}
+{{--    <div>--}}
+{{--        <strong>{{ $message }}</strong>--}}
+{{--    </div>--}}
 
-    @endif
-    <form action="#" method="POST">
+{{--    @endif--}}
+
+    <form action="/login" method="POST">
         @csrf
+        @if (session('error'))
+            <p style="color: red; margin-top: 4px">{{ session('error') }}</p>
+        @endif
         <div class="input-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder="Nhập email" required>
+            <input type="email" name="email" placeholder="Nhập email" value="{{ old('email') }}" required>
+            @error('email')
+                <p style="color: red; margin-top: 4px">{{ $message }}</p>
+            @enderror
         </div>
         <div class="input-group">
             <label>Mật khẩu</label>
             <input type="password" name="password" placeholder="Nhập mật khẩu" required>
+            @error('password')
+                <p style="color: red; margin-top: 4px">{{ $message }}</p>
+            @enderror
         </div>
         <button type="submit" class="btn">Đăng nhập</button>
         <div class="links">

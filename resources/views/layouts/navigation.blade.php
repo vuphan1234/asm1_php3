@@ -8,9 +8,13 @@
         <!-- Thanh tìm kiếm -->
         <div class="search-box">
             <form action="/product/search" method="get">
-                <input type="text" name="keyword" placeholder="Tìm kiếm sản phẩm..." value="{{ $query ?? '' }}">
+                <input type="text" name="keyword" placeholder="Tìm kiếm sản phẩm..." value="{{ old('keyword', $keyword ?? '') }}" required>
                 <button type="submit">🔍</button>
             </form>
+            <!-- Hiển thị lỗi nếu có -->
+            @if ($errors->has('keyword'))
+                <p style="color: red; margin-top: 4px">{{ $errors->first('keyword') }}</p>
+            @endif
         </div>
 
         <!-- Giỏ hàng + User -->
@@ -34,8 +38,7 @@
             <!-- <h2>Danh mục sản phẩm</h2> -->
             <ul class="category-list">
                 @foreach ($categories as $category)
-                <li><a href="/products/{{ $category->slug }}"><i>{{ $category->image }}</i>
-                        {{ $category->category_name }}</a></li>
+                <li><a href="/products/{{ $category->slug }}">{{ $category->category_name }}</a></li>
                 @endforeach
 
                 <!-- <li><a href="#"><i>📚</i> Kinh tế</a></li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -46,17 +47,18 @@ class ProductController extends Controller
     }
     public function productDetail($slug)
     {
-        $bookDetail = Book::where('slug', $slug)->get();
-        return view('productDetail', ['bookDetail' => $bookDetail, 'pageTitle' => 'Chi tiết sản phẩm']);
+        $cate = Category::all();
+        $bookDetail = Book::where('slug', $slug)->first();
+        return view('productDetail', ['bookDetail' => $bookDetail, 'cate' => $cate ,'pageTitle' => $bookDetail->title]);
     }
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
-        $query = $request->input('keyword');
-        $books = Book::query()->when($query, function ($q) use ($query) {
-            return $q->where('title', 'LIKE', "%{$query}%")
-                ->orWhere('description', 'LIKE', "%{$query}%");
+        $keyword = $request->input('keyword');
+        $books = Book::query()->when($keyword, function ($q) use ($keyword) {
+            return $q->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('description', 'LIKE', "%{$keyword}%");
         })
             ->paginate(10);
-        return view('search', ['books' => $books, 'query' => $query, 'pageTitle' => 'search']);
+        return view('search', ['books' => $books, 'keyword' => $keyword, 'pageTitle' => 'search']);
     }
 }

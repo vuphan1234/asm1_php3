@@ -23,4 +23,8 @@ class Book extends Model
         'image_url',
         'slug'
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

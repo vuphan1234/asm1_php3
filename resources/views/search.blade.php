@@ -85,7 +85,7 @@
                 <h5 class="card-title">{{ $item->title }}</h5>
                 <p class="card-text">{{ Str::limit($item->description, 100) }}</p>
                 <p class="card-text text-primary">{{ number_format($item->price) }} VND</p>
-                <a href="/productdetail/{{ $item->slug }}" class="btn btn-sm btn-info">Xem chi tiết</a>
+                <a href="/productdetail/{{ $item->slug }}" class="btn btn-sm btn-info load-more" style="text-decoration: none">Xem chi tiết</a>
             </div>
         </div>
     </div>
@@ -93,11 +93,11 @@
 </div>
 
 <div class="pagination-container">
-    {{ $books->appends(['query' => $query])->links() }}
+    {{ $books->appends(['keyword' => $keyword])->links() }}
 </div>
 @else
 <div class="alert alert-info">
-    Không tìm thấy sản phẩm nào phù hợp với từ khóa "{{ $query }}"
+    Không tìm thấy sản phẩm nào phù hợp với từ khóa "{{ $keyword }}"
 </div>
 @endif
 
